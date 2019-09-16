@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "4de016e6-b7d2-4916-b6aa-72465c28409f",
+		"name": "Employee sandbox mule4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sys-api",
+			"item": [
+				{
+					"name": "employee",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/employees",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"employees"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "arto",
+											"disabled": true
+										},
+										{
+											"key": "lastname",
+											"value": "Facello",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7e5deb37-a488-40d0-840a-0a77c22772bb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "aad8227a-d2fc-44e2-8d06-a5b3ccc17529",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7d1eacd8-75e4-4829-830a-6fa2d3b480d8",
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"id": "0c7f2a93-fbab-448c-854f-0810822862a6",
+			"key": "port",
+			"value": "8081",
+			"type": "string"
+		},
+		{
+			"id": "63e692f2-aeb9-44a3-b1af-710fcc266abd",
+			"key": "baseurl",
+			"value": "http://{{host}}:{{port}}",
+			"type": "string"
+		}
+	]
+}
