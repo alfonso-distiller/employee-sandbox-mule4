@@ -1,0 +1,19 @@
+#%RAML 1.0 DataType
+description: Represents an Employee
+properties:
+  id:
+    type: number
+    required: false
+  birth_date:
+    type: date-only
+  first_name:
+    type: string
+  last_name:
+    type: string
+  gender:
+    enum: [F,M]
+  hire_date:
+    type: date-only
+
+examples:
+  !include ../examples/employee-operations/get/employee-item.raml
