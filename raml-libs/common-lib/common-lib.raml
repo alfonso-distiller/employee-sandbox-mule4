@@ -1,0 +1,32 @@
+#%RAML 1.0 Library
+usage: Defines de base common used libraries
+
+types:
+  ProcessAcepted: !include data-types/process-accepted.raml
+
+resourceTypes:
+  process-operation:
+    get:
+      responses:
+        202:
+          body:
+            application/json:
+              type: ProcessAcepted
+  collection:
+    get:
+      description: Returns <<resourceName>> with the given parameters
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<collectionType>>
+    post:
+      description: Creates a new <<resourceName>>
+      body:
+        application/json:
+          type: <<collectionType!singularize>>
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<collectionType>>
