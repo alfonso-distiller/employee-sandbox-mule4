@@ -33,13 +33,5 @@ properties:
       </types:inputs>
     </types:operation-declaration>
   </types:enrichment>
-  <types:enrichment select="#895dc711-59d5-4c8a-87b7-8e33fcd1079f">
-    <types:processor-declaration>
-      <types:output-event>
-        <types:message>
-          <types:payload type="get-employee-params[]"/>
-        </types:message>
-      </types:output-event>
-    </types:processor-declaration>
-  </types:enrichment>
+  <types:enrichment select="#895dc711-59d5-4c8a-87b7-8e33fcd1079f"/>
 </types:mule>
