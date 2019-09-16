@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<db:config name="employees_db_config" doc:name="Database Config" doc:id="d46e834d-3f06-4672-8895-020dd4724093" >
+		<db:generic-connection url="${employees.jdbc.url}" driverClassName="${employees.jdbc.driver}" user="${employees.jdbc.username}" password="${employees.jdbc.password}"/>
+	</db:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="8388c5d3-256a-49c3-8363-b32692740905" file="application.properties" />
+</mule>

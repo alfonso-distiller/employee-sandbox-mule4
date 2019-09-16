@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="get-employee-params" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: object
+properties:
+  id:
+    type: number
+  birth_date:
+    type: date-only
+  first_name:
+    type: string
+  last_name:
+    type: string
+  gender:
+    enum: [F,M]
+  hire_date:
+    type: date-only]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#63d4729b-104e-455a-9e5f-e938e269a328">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="get-employee-params"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+    <types:operation-declaration>
+      <types:inputs>
+        <types:parameter name="inputParameters" type="get-employee-params"/>
+      </types:inputs>
+    </types:operation-declaration>
+  </types:enrichment>
+  <types:enrichment select="#895dc711-59d5-4c8a-87b7-8e33fcd1079f">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="get-employee-params[]"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

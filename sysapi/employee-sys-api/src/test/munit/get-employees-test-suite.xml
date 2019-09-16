@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<munit:config name="get-employees-test-suite.xml" />
+	<munit:test name="new-test-suite-get-employees_Sub_FlowTest" doc:id="20f5ec04-f0bd-443c-adc8-fc221b84930a" description="Test">
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="mock query database" doc:id="0cdd286b-1f46-4f64-a380-a3cb479516cc" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="get_employees_query" attributeName="doc:name" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value='[{"emp_no": 10001,"first_name": "Georgi","last_name": "Facello","gender": "M","birth_date": "1953-09-02T00:00:00","hire_date": "1986-06-26T00:00:00"}]' mediaType="application/java" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="get-employees_Sub_Flow" doc:id="b7fa6661-3ffa-4e98-a8d8-a78822f8049e" name="get-employees_Sub_Flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="718c46b9-da41-4c55-a7f1-ce971d55081a" actual="#[payload]" expected='#[[{"id":10001,"first_name":"Georgi","last_name":"Facello","gender":"M","birth_date":"1953-09-02T00:00:00","hire_date":"1986-06-26T00:00:00"}]]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
