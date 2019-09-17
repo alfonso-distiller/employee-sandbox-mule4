@@ -31,7 +31,8 @@
 							<artifactId>mariadb-java-client</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
-				</configuration>
+				<classifier>mule-application</classifier>
+                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.mulesoft.munit.tools</groupId>

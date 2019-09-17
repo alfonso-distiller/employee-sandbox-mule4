@@ -19,5 +19,10 @@ payload distinctBy $.emp_no map(employee, index) -> {
 		name: $.dept_name,
 		from: formatDate($.de_from_date),
 		to: formatDate($.de_to_date) default null
+	}) distinctBy (value) -> {unique:value}),
+	salaries: (((payload filter $.emp_no == employee.emp_no) map {
+		salary: $.salary,
+		from: formatDate($.s_from_date),
+		to: formatDate($.s_to_date) default null
 	}) distinctBy (value) -> {unique:value})
 }
