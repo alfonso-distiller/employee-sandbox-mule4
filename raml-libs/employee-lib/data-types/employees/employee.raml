@@ -21,6 +21,10 @@ properties:
     type: array
     items:
       type: !include employee-department.raml
+  salaries:
+    type: array
+    items: 
+      type: !include employee-salary.raml
 
 examples:
   !include ../../examples/employee-operations/get/employee-item.raml

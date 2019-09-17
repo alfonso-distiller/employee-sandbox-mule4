@@ -19,15 +19,22 @@ case
 	when de.to_date = '9999-01-01' then null
 	else de.to_date
 end as de_to_date,
-d.dept_name, d.dept_no
+d.dept_name, d.dept_no, s.salary,
+s.from_date s_from_date, 
+case
+	when s.to_date = '9999-01-01' then null
+	else s.to_date
+end as s_to_date
 from employees e
 left join titles t on t.emp_no = e.emp_no
 left join dept_emp de on de.emp_no = e.emp_no
 left join departments d on d.dept_no = de.dept_no
+left join salaries s on s.emp_no = e.emp_no
 where e.first_name like concat('%',:first_name,'%')
 and e.last_name like concat('%',:last_name,'%')
 and ('1' = :expand or t.to_date = '9999-01-01')
 and ('1' = :expand or de.to_date = '9999-01-01')
+and ('1' = :expand or s.to_date = '9999-01-01')
 order by e.emp_no
 limit 200</db:sql>
 			<db:input-parameters ><![CDATA[#[%dw 2.0
