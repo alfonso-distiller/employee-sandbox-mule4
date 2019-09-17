@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="get-titles_Sub_Flow" doc:id="030d1532-d4c6-47cd-b464-1e85748e0b6f" >
+		<db:select doc:name="get titles query" doc:id="38c30b7d-01b9-4c73-82fa-3c3a034f7117" config-ref="employees_db_config">
+			<db:sql >select distinct title from titles order by title</db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="57cf3cdd-c6ba-4367-8057-06738ba0070a" >
+			<ee:message >
+				<ee:set-payload resource="dwl/titles/get-titles.dwl"/>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

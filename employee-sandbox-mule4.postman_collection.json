@@ -9,7 +9,7 @@
 			"name": "sys-api",
 			"item": [
 				{
-					"name": "employee",
+					"name": "employees",
 					"item": [
 						{
 							"name": "get all",
@@ -47,6 +47,52 @@
 							"response": []
 						}
 					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "509a7196-ebaa-4abb-9ddf-51605543e379",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3548af1f-731d-4985-a8ef-84afe35fdc4e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "titles",
+					"item": [
+						{
+							"name": "get titles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/titles",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"titles"
+									]
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				}
 			]
@@ -76,19 +122,19 @@
 	],
 	"variable": [
 		{
-			"id": "bf050a0e-2c71-4f90-8e81-9da3db3bd777",
+			"id": "8897e7e1-b829-4bd0-a110-c437e30c3691",
 			"key": "host",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "19a0474b-be40-4aab-ab7c-e4f43a036f43",
+			"id": "07a179f3-165d-4acc-ad47-71480bfac6aa",
 			"key": "port",
 			"value": "8081",
 			"type": "string"
 		},
 		{
-			"id": "a62b2772-30f0-4c32-8556-2fdcc269e9fc",
+			"id": "54dcc3cc-3788-408e-bd7b-4baa77c27569",
 			"key": "baseurl",
 			"value": "http://{{host}}:{{port}}",
 			"type": "string"
