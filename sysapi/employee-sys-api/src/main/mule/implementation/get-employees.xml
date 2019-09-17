@@ -26,14 +26,17 @@ left join dept_emp de on de.emp_no = e.emp_no
 left join departments d on d.dept_no = de.dept_no
 where e.first_name like concat('%',:first_name,'%')
 and e.last_name like concat('%',:last_name,'%')
+and ('1' = :expand or t.to_date = '9999-01-01')
+and ('1' = :expand or de.to_date = '9999-01-01')
 order by e.emp_no
 limit 200</db:sql>
 			<db:input-parameters ><![CDATA[#[%dw 2.0
 output application/java
 ---
 {
-	last_name: attributes.queryParams.lastname default '',
-	first_name: attributes.queryParams.name default ''
+	last_name: attributes.queryParams.last_name default '',
+	first_name: attributes.queryParams.name default '',
+	expand: if(attributes.queryParams.expand_details) 1 else 0
 }]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="895dc711-59d5-4c8a-87b7-8e33fcd1079f" >

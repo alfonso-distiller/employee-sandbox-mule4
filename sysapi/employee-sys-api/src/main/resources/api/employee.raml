@@ -27,10 +27,15 @@ uses:
         description: Adding this parameter will filter employees with the given value
         type: string
         required: false
-      lastname:
+      last_name:
         description: Adding this parameter will filter employees with the given value
         type: string
         required:  false
+      expand_details:
+        description: will expand all titles and dependencies
+        type: boolean
+        required: false
+        default: false
   /export:
     type: 
       common-lib.process-operation:

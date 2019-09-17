@@ -28,12 +28,17 @@
 									"query": [
 										{
 											"key": "name",
-											"value": "arto",
+											"value": "Parto",
 											"disabled": true
 										},
 										{
-											"key": "lastname",
-											"value": "Facello",
+											"key": "last_name",
+											"value": "Mandell",
+											"disabled": true
+										},
+										{
+											"key": "expand_details",
+											"value": "true",
 											"disabled": true
 										}
 									]
@@ -71,19 +76,19 @@
 	],
 	"variable": [
 		{
-			"id": "7d1eacd8-75e4-4829-830a-6fa2d3b480d8",
+			"id": "bf050a0e-2c71-4f90-8e81-9da3db3bd777",
 			"key": "host",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "0c7f2a93-fbab-448c-854f-0810822862a6",
+			"id": "19a0474b-be40-4aab-ab7c-e4f43a036f43",
 			"key": "port",
 			"value": "8081",
 			"type": "string"
 		},
 		{
-			"id": "63e692f2-aeb9-44a3-b1af-710fcc266abd",
+			"id": "a62b2772-30f0-4c32-8556-2fdcc269e9fc",
 			"key": "baseurl",
 			"value": "http://{{host}}:{{port}}",
 			"type": "string"
