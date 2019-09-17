@@ -7,18 +7,27 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<sub-flow name="get-employees_Sub_Flow" doc:id="1083ad2c-8945-4475-ba86-dbca82f7f418" >
 		<db:select doc:name="get_employees_query" doc:id="63d4729b-104e-455a-9e5f-e938e269a328" config-ref="employees_db_config">
-			<db:sql>SELECT e.emp_no, e.birth_date, e.first_name, e.last_name, 
-e.gender, e.hire_date, t.title, t.from_date, 
+			<db:sql>SELECT e.emp_no, e.birth_date, e.first_name, 
+e.last_name, e.gender, e.hire_date, 
+t.title, t.from_date t_from_date, 
 case
 	when t.to_date = '9999-01-01' then null
 	else t.to_date
-end as to_date
+end as t_to_date,
+de.from_date de_from_date,
+case
+	when de.to_date = '9999-01-01' then null
+	else de.to_date
+end as de_to_date,
+d.dept_name, d.dept_no
 from employees e
 left join titles t on t.emp_no = e.emp_no
-where first_name like concat('%',:first_name,'%')
-and last_name like concat('%',:last_name,'%')
-order by emp_no
-limit 1000</db:sql>
+left join dept_emp de on de.emp_no = e.emp_no
+left join departments d on d.dept_no = de.dept_no
+where e.first_name like concat('%',:first_name,'%')
+and e.last_name like concat('%',:last_name,'%')
+order by e.emp_no
+limit 200</db:sql>
 			<db:input-parameters ><![CDATA[#[%dw 2.0
 output application/java
 ---

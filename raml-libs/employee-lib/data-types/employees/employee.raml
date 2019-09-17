@@ -16,7 +16,11 @@ properties:
   titles:
     type: array
     items: 
-      type: !include title.raml
+      type: !include employee-title.raml
+  departments:
+    type: array
+    items:
+      type: !include employee-department.raml
 
 examples:
-  !include ../examples/employee-operations/get/employee-item.raml
+  !include ../../examples/employee-operations/get/employee-item.raml
