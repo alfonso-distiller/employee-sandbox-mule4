@@ -11,10 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="57cf3cdd-c6ba-4367-8057-06738ba0070a" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload.*title]]></ee:set-payload>
+				<ee:set-payload resource="dwl/titles/get-titles.dwl"/>
 			</ee:message>
 		</ee:transform>
 	</sub-flow>
