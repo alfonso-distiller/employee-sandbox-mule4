@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="post-department_Sub_Flow" doc:id="7e156796-6410-45de-84e7-f63168a01d98" >
+		<db:select doc:name="get next id for departments" doc:id="10f36eae-2a0a-4496-9308-dc515dee61b0" config-ref="employees_db_config" target="department_id" targetValue='#[payload[0].id]'>
+			<db:sql >select (count(*)+1) as id from departments</db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="9df9c55d-be7d-4bd7-801d-3a666592e578" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="final_output" resource="dwl/departments/get-next-departmentid.dwl"/>
+			</ee:variables>
+		</ee:transform>
+		<db:insert doc:name="Insert" doc:id="1bbf15d5-71a2-4448-88ce-29b0157df1ed" config-ref="employees_db_config">
+			<db:sql >INSERT INTO employees.departments
+(dept_no, dept_name)
+VALUES(:id, :name);
+</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	id: vars.final_output.id,
+	name: vars.final_output.name
+}]]]></db:input-parameters>
+		</db:insert>
+		<ee:transform doc:name="Transform Message" doc:id="3ae9e153-4e94-4d59-b94b-fee6949dfbca" >
+			<ee:message >
+				<ee:set-payload resource="dwl/departments/post-departments-response.dwl" />
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>

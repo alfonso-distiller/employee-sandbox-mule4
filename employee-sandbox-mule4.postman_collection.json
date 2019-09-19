@@ -114,6 +114,40 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "post departments",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/departments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"departments"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -146,19 +180,19 @@
 	],
 	"variable": [
 		{
-			"id": "5f40d150-80ec-45f4-902c-3d67d7ac96d2",
+			"id": "c2649212-f98c-4fff-b1e5-b4afe4432d94",
 			"key": "host",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "f59b0736-22c3-4a75-829b-568d80b19267",
+			"id": "439da6a2-c564-4e18-8208-dc11231f9a4e",
 			"key": "port",
 			"value": "8081",
 			"type": "string"
 		},
 		{
-			"id": "579e1f56-62f1-411f-8792-6f18f4e59674",
+			"id": "c9487bc2-6c4d-43a7-b129-6cdc3d4dd5c1",
 			"key": "baseurl",
 			"value": "http://{{host}}:{{port}}",
 			"type": "string"

@@ -160,6 +160,6 @@ output application/json
         <flow-ref doc:name="get-departments_Sub_Flow" doc:id="786a3490-8fb5-41f9-8bcf-44107c3c83d5" name="get-departments_Sub_Flow" />
     </flow>
     <flow name="post:\departments:application\json:employee-config">
-        <logger level="INFO" message="post:\departments:application\json:employee-config" />
+		<flow-ref doc:name="post-department_Sub_Flow" doc:id="cf8bac4c-0bb9-4909-bb14-1aff181554e3" name="post-department_Sub_Flow"/>
     </flow>
 </mule>

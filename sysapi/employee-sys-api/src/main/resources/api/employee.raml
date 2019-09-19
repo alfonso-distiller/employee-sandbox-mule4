@@ -12,8 +12,8 @@ protocols:
   - HTTPS
 
 uses:
-  common-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/common-lib/1.0.3/common-lib.raml
-  employee-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/employee-lib/1.0.9/employee-lib.raml
+  common-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/common-lib/1.0.5/common-lib.raml
+  employee-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/employee-lib/1.0.10/employee-lib.raml
 
 /employees:
   type: 
@@ -21,6 +21,7 @@ uses:
       resourceName: Employee
       collectionType: employee-lib.Employee
       collectionType!singularize: employee-lib.Employee
+      collectionType!created: employee-lib.Employee
   get:
     queryParameters:
       name:
@@ -42,9 +43,11 @@ uses:
 /departments:
   type:
     common-lib.collection:
-      collectionType: employee-lib.Departments
-      collectionType!singularize: employee-lib.Departments
+      collectionType: employee-lib.GetDepartments
+      collectionType!singularize: employee-lib.GetDepartment
       resourceName: department
+      collectionType!created: employee-lib.PostDepartment
+
 /titles:
   get:
     description: returns the titles currently available in the application
