@@ -13,7 +13,7 @@ protocols:
 
 uses:
   common-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/common-lib/1.0.3/common-lib.raml
-  employee-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/employee-lib/1.0.6/employee-lib.raml
+  employee-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/employee-lib/1.0.9/employee-lib.raml
 
 /employees:
   type: 
@@ -39,7 +39,12 @@ uses:
   /export:
     type: 
       common-lib.process-operation:
-    
+/departments:
+  type:
+    common-lib.collection:
+      collectionType: employee-lib.Departments
+      collectionType!singularize: employee-lib.Departments
+      resourceName: department
 /titles:
   get:
     description: returns the titles currently available in the application

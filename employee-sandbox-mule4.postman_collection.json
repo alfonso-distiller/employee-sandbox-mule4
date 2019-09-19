@@ -17,7 +17,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseurl}}/api/employees",
+									"raw": "{{baseurl}}/api/employees?expand_details=true",
 									"host": [
 										"{{baseurl}}"
 									],
@@ -38,8 +38,7 @@
 										},
 										{
 											"key": "expand_details",
-											"value": "true",
-											"disabled": true
+											"value": "true"
 										}
 									]
 								}
@@ -94,6 +93,31 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "departments",
+					"item": [
+						{
+							"name": "get departments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/departments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"departments"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			]
 		}
@@ -122,19 +146,19 @@
 	],
 	"variable": [
 		{
-			"id": "8897e7e1-b829-4bd0-a110-c437e30c3691",
+			"id": "5f40d150-80ec-45f4-902c-3d67d7ac96d2",
 			"key": "host",
 			"value": "localhost",
 			"type": "string"
 		},
 		{
-			"id": "07a179f3-165d-4acc-ad47-71480bfac6aa",
+			"id": "f59b0736-22c3-4a75-829b-568d80b19267",
 			"key": "port",
 			"value": "8081",
 			"type": "string"
 		},
 		{
-			"id": "54dcc3cc-3788-408e-bd7b-4baa77c27569",
+			"id": "579e1f56-62f1-411f-8792-6f18f4e59674",
 			"key": "baseurl",
 			"value": "http://{{host}}:{{port}}",
 			"type": "string"
