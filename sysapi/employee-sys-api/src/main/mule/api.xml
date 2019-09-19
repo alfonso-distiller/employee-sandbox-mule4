@@ -157,7 +157,7 @@ output application/json
         <flow-ref doc:name="get-titles_Sub_Flow" doc:id="6adc5ce7-4cf5-459a-9ca2-f13b3faff254" name="get-titles_Sub_Flow" />
     </flow>
     <flow name="get:\departments:employee-config">
-		<flow-ref doc:name="get-departments_Sub_Flow" doc:id="786a3490-8fb5-41f9-8bcf-44107c3c83d5" name="get-departments_Sub_Flow"/>
+        <flow-ref doc:name="get-departments_Sub_Flow" doc:id="786a3490-8fb5-41f9-8bcf-44107c3c83d5" name="get-departments_Sub_Flow" />
     </flow>
     <flow name="post:\departments:application\json:employee-config">
         <logger level="INFO" message="post:\departments:application\json:employee-config" />
