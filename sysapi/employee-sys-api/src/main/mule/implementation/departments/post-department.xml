@@ -13,14 +13,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			<ee:message >
 			</ee:message>
 			<ee:variables >
-				<ee:set-variable variableName="final_output" ><![CDATA[%dw 2.0
-import * from dw::core::Strings
-output application/java
----
-{
-	id: "d" ++ leftPad(vars.department_id,3,"0"),
-	name: payload.name
-}]]></ee:set-variable>
+				<ee:set-variable variableName="final_output" resource="dwl/departments/get-next-departmentid.dwl"/>
 			</ee:variables>
 		</ee:transform>
 		<db:insert doc:name="Insert" doc:id="1bbf15d5-71a2-4448-88ce-29b0157df1ed" config-ref="employees_db_config">
@@ -35,10 +28,7 @@ VALUES(:id, :name);
 		</db:insert>
 		<ee:transform doc:name="Transform Message" doc:id="3ae9e153-4e94-4d59-b94b-fee6949dfbca" >
 			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-vars.final_output]]></ee:set-payload>
+				<ee:set-payload resource="dwl/departments/post-departments-response.dwl" />
 			</ee:message>
 		</ee:transform>
 	</sub-flow>
