@@ -24,9 +24,9 @@ resourceTypes:
       description: Creates a new <<resourceName>>
       body:
         application/json:
-          type: <<collectionType!singularize>>
+          type: <<collectionType!created>>
       responses:
         200:
           body:
             application/json:
-              type: <<collectionType>>
+              type: <<collectionType!singularize>>
