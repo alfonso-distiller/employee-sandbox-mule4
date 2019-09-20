@@ -19,20 +19,10 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
 				<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0d6de7c4-321e-43b8-9168-700cf7ce73e0" >
 					<ee:transform doc:name="Transform Message" doc:id="3807b019-9f05-493e-b125-763c2f91121d" >
 						<ee:message >
-							<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
----
-{
-	code: 409,
-	message: error.description,
-	description: error.detailedDescription
-}]]></ee:set-payload>
+							<ee:set-payload resource="dwl/common/conflict/set-conflict-payload.dwl" />
 						</ee:message>
 						<ee:variables >
-							<ee:set-variable variableName="httpStatus" ><![CDATA[%dw 2.0
-output application/java
----
-409]]></ee:set-variable>
+							<ee:set-variable variableName="httpStatus" resource="dwl/common/conflict/set-conflict-httpstatus.dwl"/>
 						</ee:variables>
 					</ee:transform>
 				</on-error-propagate>
