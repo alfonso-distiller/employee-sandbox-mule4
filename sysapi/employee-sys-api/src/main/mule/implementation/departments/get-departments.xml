@@ -7,7 +7,10 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<sub-flow name="get-departments_Sub_Flow" doc:id="02152277-b711-40f0-b0a3-dff6bd41bbe8" >
 		<db:select doc:name="get departments" doc:id="fbb27692-d4af-4dbb-a30d-2945a74f2219" config-ref="employees_db_config">
-			<db:sql >select dept_no, dept_name from departments order by dept_no</db:sql>
+			<db:sql >select dept_no, dept_name from departments where lower(dept_name) like concat('%',:name,'%')order by dept_no</db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	name: attributes.queryParams.name default ''
+}]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="c3b590c9-30c5-403d-8d0c-630401c53823" >
 			<ee:message >

@@ -47,6 +47,12 @@ uses:
       collectionType!singularize: employee-lib.GetDepartment
       resourceName: department
       collectionType!created: employee-lib.PostDepartment
+  get:
+    queryParameters:
+      name:
+        required: false
+        type: string
+        example: quality
 
 /titles:
   get:
