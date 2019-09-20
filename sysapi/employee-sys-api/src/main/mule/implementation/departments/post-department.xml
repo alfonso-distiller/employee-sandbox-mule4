@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
 	<sub-flow name="post-department_Sub_Flow" doc:id="7e156796-6410-45de-84e7-f63168a01d98" >
-		<db:select doc:name="get next id for departments" doc:id="10f36eae-2a0a-4496-9308-dc515dee61b0" config-ref="employees_db_config" target="department_id" targetValue='#[payload[0].id]'>
-			<db:sql >select (count(*)+1) as id from departments</db:sql>
+		<db:select doc:name="get next id for departments" doc:id="10f36eae-2a0a-4496-9308-dc515dee61b0" config-ref="employees_db_config" target="department" targetValue='#[payload[0]]'>
+			<db:sql >select (count(*)+1) as id, (select dept_name from departments where lower(dept_name) = lower(:name)) as name from departments </db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	name: payload.name
+}]]]></db:input-parameters>
 		</db:select>
+		<try doc:name="Try" doc:id="2f81978a-c17b-4a0c-ad0f-1c36052db676" >
+			<validation:is-null doc:name="Is null" doc:id="06f45b46-7719-4748-a957-c7da85d423db" value="#[vars.department.name]" message="#['Constraint validated']"/>
+			<error-handler >
+				<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="0d6de7c4-321e-43b8-9168-700cf7ce73e0" >
+					<ee:transform doc:name="Transform Message" doc:id="3807b019-9f05-493e-b125-763c2f91121d" >
+						<ee:message >
+							<ee:set-payload resource="dwl/common/conflict/set-conflict-payload.dwl" />
+						</ee:message>
+						<ee:variables >
+							<ee:set-variable variableName="httpStatus" resource="dwl/common/conflict/set-conflict-httpstatus.dwl"/>
+						</ee:variables>
+					</ee:transform>
+				</on-error-propagate>
+			</error-handler>
+		</try>
 		<ee:transform doc:name="Transform Message" doc:id="9df9c55d-be7d-4bd7-801d-3a666592e578" >
 			<ee:message >
 			</ee:message>

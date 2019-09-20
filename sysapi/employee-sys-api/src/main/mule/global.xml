@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<db:config name="employees_db_config" doc:name="Database Config" doc:id="d46e834d-3f06-4672-8895-020dd4724093" >
 		<db:generic-connection url="${employees.jdbc.url}" driverClassName="${employees.jdbc.driver}" user="${employees.jdbc.username}" password="${employees.jdbc.password}"/>
 	</db:config>
 	<configuration-properties doc:name="Configuration properties" doc:id="8388c5d3-256a-49c3-8363-b32692740905" file="application.properties" />
+	<configuration doc:name="Configuration" doc:id="92864896-2b28-42be-803b-bea7977f42af" defaultErrorHandler-ref="globalError_Handler" />
+	<error-handler name="globalError_Handler" doc:id="60cae9b8-81f1-4e21-be38-19ecd6bf4442" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="2859b003-3275-47c9-ab30-136364a0cd15" >
+			<ee:transform doc:name="Transform Message" doc:id="224e77ee-ee2b-4b40-8f97-d2f7f1567c0b" >
+				<ee:message >
+					<ee:set-payload resource="dwl/common/set-error-payload.dwl"/>
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="httpStatus" resource="dwl/common/set-error-httpstatus.dwl"/>
+				</ee:variables>
+			</ee:transform>
+		</on-error-continue>
+	</error-handler>
 </mule>
