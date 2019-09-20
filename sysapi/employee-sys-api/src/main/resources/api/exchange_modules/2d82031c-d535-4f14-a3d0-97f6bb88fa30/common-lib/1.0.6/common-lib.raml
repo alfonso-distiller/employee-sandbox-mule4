@@ -3,6 +3,15 @@ usage: Defines the base patterns and types to be used in all applications
 
 types:
   ProcessAcepted: !include data-types/process-accepted.raml
+  Error: !include data-types/error.raml
+
+traits:
+  conflictable:
+    responses:
+      409:
+        body:
+          application/json:
+            type: Error
 
 resourceTypes:
   process-operation:

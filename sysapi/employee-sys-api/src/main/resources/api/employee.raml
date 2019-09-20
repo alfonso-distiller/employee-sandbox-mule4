@@ -12,8 +12,17 @@ protocols:
   - HTTPS
 
 uses:
-  common-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/common-lib/1.0.5/common-lib.raml
+  common-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/common-lib/1.0.6/common-lib.raml
   employee-lib: /exchange_modules/2d82031c-d535-4f14-a3d0-97f6bb88fa30/employee-lib/1.0.10/employee-lib.raml
+
+traits:
+  name-searchable:
+    queryParameters:
+      name:
+        description: <<givenDescription>>
+        type: string
+        required: false
+      
 
 /employees:
   type: 
@@ -23,11 +32,11 @@ uses:
       collectionType!singularize: employee-lib.Employee
       collectionType!created: employee-lib.Employee
   get:
+    is: [name-searchable: {
+          givenDescription: Search by employee name
+        }
+      ]
     queryParameters:
-      name:
-        description: Adding this parameter will filter employees with the given value
-        type: string
-        required: false
       last_name:
         description: Adding this parameter will filter employees with the given value
         type: string
@@ -48,11 +57,12 @@ uses:
       resourceName: department
       collectionType!created: employee-lib.PostDepartment
   get:
-    queryParameters:
-      name:
-        required: false
-        type: string
-        example: quality
+    is: [name-searchable: {
+          givenDescription: Search by department name
+        }
+      ]
+  post:
+    is: [common-lib.conflictable]
 
 /titles:
   get:

@@ -104,7 +104,13 @@
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+		<dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-validation-module</artifactId>
+            <version>1.4.0</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+    </dependencies>
 
 	<repositories>
 		<repository>
